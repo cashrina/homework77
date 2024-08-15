@@ -6,7 +6,6 @@ export interface CommentState {
   items: Comments[];
   comment: Comments | null;
   itemsFetching: boolean;
-  oneFetching: boolean;
   isCreating: boolean;
 }
 
@@ -15,7 +14,6 @@ const initialState: CommentState = {
   comment: null,
   itemsFetching: false,
   isCreating: false,
-  oneFetching: false,
 };
 
 export const commentsSlice = createSlice({
@@ -40,22 +38,12 @@ export const commentsSlice = createSlice({
       state.isCreating = false;
     });
 
-    // builder.addCase(fetchOneComment.pending, (state) => {
-    //   state.comment = null;
-    //   state.oneFetching = true;
-    // }).addCase(fetchOneComment.fulfilled, (state, {payload: comment}) => {
-    //   state.comment = comment;
-    //   state.oneFetching = false;
-    // }).addCase(fetchOneComment.rejected, (state) => {
-    //   state.oneFetching = false;
-    // });
   },
   selectors: {
     selectComments: (state) => state.items,
     selectCommentsFetching: (state) => state.itemsFetching,
     selectCommentCreating: (state) => state.isCreating,
     selectOneComment: (state) => state.comment,
-    selectOneCommentFetching: (state) => state.oneFetching,
   }
 });
 
@@ -63,8 +51,5 @@ export const commentsReducer = commentsSlice.reducer;
 
 export const {
   selectComments,
-  selectCommentsFetching,
   selectCommentCreating,
-  selectOneComment,
-  selectOneCommentFetching,
 } = commentsSlice.selectors;
