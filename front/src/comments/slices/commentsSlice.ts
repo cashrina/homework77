@@ -1,6 +1,6 @@
 import { Comments } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
-import { createComment } from './commentsThunks.ts';
+import { createComment, fetchComments } from './commentsThunks.ts';
 
 export interface CommentState {
   items: Comments[];
@@ -23,14 +23,14 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(fetchComments.pending, (state) => {
-    //   state.itemsFetching = true;
-    // }).addCase(fetchComments.fulfilled, (state, {payload: comment}) => {
-    //   state.itemsFetching = false;
-    //   state.items = comment;
-    // }).addCase(fetchComments.rejected, (state) => {
-    //   state.itemsFetching = false;
-    // });
+    builder.addCase(fetchComments.pending, (state) => {
+      state.itemsFetching = true;
+    }).addCase(fetchComments.fulfilled, (state, {payload: comments}) => {
+      state.itemsFetching = false;
+      state.items = comments;
+    }).addCase(fetchComments.rejected, (state) => {
+      state.itemsFetching = false;
+    });
 
     builder.addCase(createComment.pending, (state) => {
       state.isCreating = true;

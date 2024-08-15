@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CommentsMutation } from '../../types.ts';
+import { Comments, CommentsMutation } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 
-export const fetchComments = createAsyncThunk<Comment[]>(
+export const fetchComments = createAsyncThunk<Comments[]>(
   'comments/fetchAll',
   async () => {
-    const {data: comments} = await axiosApi.get<Comment[]>('/comments');
-    return comments;
+    const { data } = await axiosApi.get<Comments[]>('/comments');
+    return data;
   }
 );
 
