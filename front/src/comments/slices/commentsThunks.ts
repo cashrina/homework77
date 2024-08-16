@@ -5,7 +5,7 @@ import axiosApi from '../../axiosApi.ts';
 export const fetchComments = createAsyncThunk<Comments[]>(
   'comments/fetchAll',
   async () => {
-    const {data: comments} = await axiosApi.get<Comments[]>('/comments');
+    const {data: comments} = await axiosApi.get<Comments[]>('/');
     return comments;
   }
 );
@@ -22,6 +22,6 @@ export const createComment = createAsyncThunk<void, CommentsMutation>(
     if (commentMutation.image) {
       formData.append('image', commentMutation.image);
     }
-    await axiosApi.post('/comments', formData);
+    await axiosApi.post('/', formData);
   }
 );
