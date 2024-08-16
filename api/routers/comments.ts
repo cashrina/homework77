@@ -5,12 +5,12 @@ import { CommentsMutation } from '../types';
 
 const commentsRouter = express.Router();
 
-commentsRouter.get('/comments', async (_req, res) => {
+commentsRouter.get('/', async (_req, res) => {
   const comments = await fileDb.getItems();
   return res.send(comments);
 });
 
-commentsRouter.post('/comments', imagesUpload.single('image'), async (req, res) => {
+commentsRouter.post('/', imagesUpload.single('image'), async (req, res) => {
   if (!req.body.description) {
     return res.status(400).send({ error: 'Description is required!' });
   }
