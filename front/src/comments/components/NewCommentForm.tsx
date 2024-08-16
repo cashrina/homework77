@@ -35,15 +35,15 @@ const NewCommentForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
         }));
     };
 
-    const fileInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, files } = event.target;
-        const value = files && files[0] ? files[0] : null;
+  const fileInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+    const file = files && files[0] ? files[0] : null;
 
-        setState(prevState => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
+    setState(prevState => ({
+      ...prevState,
+      image: file,
+    }));
+  };
 
     return (
         <Grid container direction="column" spacing={2} component="form" onSubmit={submitFormHandler}>
